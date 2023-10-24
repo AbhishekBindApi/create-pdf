@@ -1,49 +1,45 @@
 <?php
 
-require('./fpdf/fpdf.php'); // Include the FPDF library
+require('fpdf/fpdf.php'); 
+// New object created and constructor invoked 
+$pdf = new FPDF(); 
 
-// Create a PDF object
-$pdf = new FPDF();
-$pdf->AddPage();
-
-// Set font and font size for the heading
-$pdf->SetFont('Arial', 'B', 20); // 'B' indicates bold
-
-$pdf->Cell(0, 18, 'A Simple PDF File', 0, 1, ''); // Add the heading centered
+// Add new pages. By default no pages available.
+$pdf->AddPage(); 
 
 // Reset font for the content
-$pdf->SetFont('Arial', '', 10);
+$pdf->SetFont('Arial', '', 20);
+// Reset margins for the content
+$pdf->SetMargins(25, 0, $right=null);
 
-$pdf->Cell(0, 20, 'This is a small demonstration .pdf file -', 0, 1, '');
-$pdf->Cell(0, 0, 'just for use in the Virtual Mechanics tutorials. More text. And more', 0, 1, '');
-$pdf->Cell(0, 8, 'text. And more text. And more text. And more text.', 0, 1, '');
-$pdf->Cell(0, 4, 'And more text. And more text. And more text. And more text. And more', 0, 1, '');
-$pdf->Cell(0, 4, 'text. And more text. Boring, zzzzz. And more text. And more text. And', 0, 1, '');
-$pdf->Cell(0, 4, 'more text. And more text. And more text. And more text. And more text.', 0, 1, '');
-$pdf->Cell(0, 8, 'And more text. And more text.', 0, 1, '');
-$pdf->Cell(0, 4, 'And more text. And more text. And more text. And more text. And more', 0, 1, '');
-$pdf->Cell(0, 4, 'text. And more text. And more text. Even more. Continued on page 2 ...', 0, 1, '');
-$pdf->AddPage();
-
-// Set font and font size for the heading
-$pdf->SetFont('Arial', 'B', 20); // 'B' indicates bold
-
-$pdf->Cell(0, 18, 'Simple PDF File 2', 0, 1, ''); // Add the heading centered
+$pdf->Image('./img/logo.jpg', 20, 10, 35, 0); // Add the Image
 
 // Reset font for the content
-$pdf->SetFont('Arial', '', 10);
+$pdf->SetFont('Arial', '', 12);
 
-$pdf->Cell(0, 4, '...continued from page 1. Yet more text. And more text. And more text.', 0, 1, '');
-$pdf->Cell(0, 4, 'And more text. And more text. And more text. And more text. And more', 0, 1, '');
-$pdf->Cell(0, 4, 'text. Oh, how boring typing this stuff. But not as boring as watching', 0, 1, '');
-$pdf->Cell(0, 4, 'Boring. More, a little more text. The end, and just as well.', 0, 1, '');
+$pdf->SetMargins(20, 0, $right=null);
 
+$pdf->Cell(0, 40, '', 0, 1,'');
+$pdf->Cell(0, 2, 'Line 1', 0, 1,'');
+$pdf->Cell(0, 4, 'Line 1', 0, 1,'C');
+$pdf->Cell(0, 2, 'Line 2', 0, 1,'');
+$pdf->Cell(0, 4, 'Line 2', 0, 1,'C');
+$pdf->Cell(0, 2, 'Line 3', 0, 1,'');
+$pdf->Cell(0, 4, 'Line 3', 0, 1,'C');
+$pdf->Cell(0, 2, 'Line 4', 0, 1,'');
+$pdf->Cell(0, 4, 'Line 4', 0, 1,'C');
 
-// Set the file path for the PDF
-$pdfFilePath = $_SERVER['DOCUMENT_ROOT'] . '/sample.pdf';
+$pdf->Cell(0, 20, 'Line 1', 0, 1,'C');
 
-// Output the PDF to the specified file path
-$pdf->Output($pdfFilePath, 'F'); // 'F' means save to a file
+// Reset font for the content
+$pdf->SetFont('Arial', 'B', 13);
+$pdf->SetMargins(20, 0, $right=null);
+$pdf->Cell(0, 4, 'This is heading', 0, 1,'');
+// Reset font for the content
+$pdf->SetFont('Arial', '', 13);
+$pdf->SetMargins(20, 0, $right=null);
+$pdf->Cell(0, 15, 'Multiple line text goes here. You can write as much text as you want.', 0, 1,'');
 
-// Display a success message
-echo "Created PDF successfully!";
+$pdf->Output();
+
+?>
